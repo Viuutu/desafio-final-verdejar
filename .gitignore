@@ -1,0 +1,17 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Segredos locais
+.env
+.env.*
+!.env.example
+
+# Dados brutos extraídos e gerados
+brutos/
+
+# Ferramentas locais
+.vscode/
+.idea/
