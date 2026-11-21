@@ -28,6 +28,8 @@ O briefing pede pelo menos duas sugestões rejeitadas, com o trecho sugerido, mo
 
 ## Falha e retrabalho observados
 
+No desenvolvimento do ETL, a primeira versão dos imports internos falhou ao executar `python -m etl.main`, com `ModuleNotFoundError: No module named 'extracao'`. A versão foi ajustada para usar imports relativos quando o código roda como módulo e imports locais quando executado diretamente; o fluxo foi então validado com `python -m etl.main --banco sqlite --reprocessar`. Confirme essa sequência com sua experiência antes de apresentá-la.
+
 Durante a montagem da planilha, a primeira versão de algumas fórmulas usou referências de linha deslocadas. Isso causou erros de cálculo. A IA corrigiu a conversão entre o índice dos registros e a linha do Excel (os dados começam na linha 2), recalculou as fórmulas e verificou que não restaram erros. Também alterou temporariamente o valor informado de um pedido: o painel passou de 238 para 237 divergências e voltou a 238 quando o valor foi restaurado.
 
 Esse retrabalho foi feito pela IA nesta sessão. Não o descreva como uma correção feita pelo Fellow. Se o briefing exigir que você explique uma falha corrigida por você, escolha uma falha que você tenha realmente reproduzido e corrigido, ou combine com a coordenação como apresentar este caso de forma fiel.
