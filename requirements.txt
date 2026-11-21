@@ -1,0 +1,4 @@
+# Testes do projeto
+pytest==8.3.5
+# Necessário somente para o destino PostgreSQL (roda binária para Python 3.8+):
+psycopg[binary]==3.1.20
