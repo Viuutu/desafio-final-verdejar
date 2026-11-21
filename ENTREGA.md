@@ -13,7 +13,7 @@ O desafio pede um único upload no AI/R Learning até **24/11/2026, às 23h59 (h
 
 ## Resumo para copiar ao completar
 
-**Pull Request:** [cole o link público aqui]
+**Pull Request:** https://github.com/Viuutu/desafio-final-verdejar/pull/1
 
 **Vídeo da defesa oral:** [cole o link público aqui]
 
