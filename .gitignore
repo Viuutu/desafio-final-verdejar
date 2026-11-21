@@ -11,6 +11,7 @@ __pycache__/
 
 # Dados brutos extraídos e gerados
 brutos/
+*.db
 
 # Ferramentas locais
 .vscode/
