@@ -22,7 +22,6 @@ Na primeira execução com `python -m etl.main`, a IA importava os módulos inte
 
 ## Reflexão pessoal para a entrega (10–20 linhas)
 
-Rascunho baseado no que aconteceu nesta conversa; revise para confirmar que representa sua experiência e ajuste as palavras antes de entregar:
 
 Minha maior dificuldade foi colocar as partes para funcionarem juntas: API, terminal do VS Code e PostgreSQL no Docker.
 No começo, misturei comandos e não sabia se a API estava iniciada.
