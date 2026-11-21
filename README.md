@@ -13,6 +13,11 @@ Pipeline em Python que lê clientes e pedidos da API local paginada, preserva os
 - `GUIA_DE_DEFESA.md`: explicação didática e roteiro para apresentação.
 - `COMO_USEI_IA.md`: registro do uso de IA e pontos de reflexão.
 - `ENTREGA.md`: checklist para o upload, PR e gravação.
+- `Verdejar_Resumo_ETL.xlsx`: planilha editável com painel, tabelas e gráficos de vendas e qualidade dos pedidos.
+
+### Abrir a planilha
+
+[Abrir ou baixar o painel de vendas no Excel](./Verdejar_Resumo_ETL.xlsx). No GitHub, o link abre a visualização do arquivo; você também pode baixá-lo para editar no Excel.
 
 ## Requisitos
 
