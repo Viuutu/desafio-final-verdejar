@@ -1,24 +1,32 @@
-# Checklist do arquivo de entrega
+# Entrega do desafio final
 
-O desafio pede um único upload no AI/R Learning até **24/11/2026, às 23h59 (horário de Brasília)**. O arquivo enviado deve conter links e reflexão, não apenas o código deste diretório.
+O briefing pede um único upload no AI/R Learning até **24/11/2026, às 23h59 (horário de Brasília)**. Envie este arquivo depois de substituir os campos pendentes pela reflexão final e pelo link público do vídeo. Inclua também uma cópia final da seção “Como usei IA”.
 
-## Entregas que dependem do Fellow
+## O que já está publicado
 
-- [ ] Criar branch pessoal e publicar o repositório remoto conforme a orientação da squad.
-- [ ] Abrir um Pull Request revisável para a branch principal e inserir o link abaixo.
-- [ ] Revisar `COMO_USEI_IA.md`: incluir duas sugestões aceitas e duas rejeitadas com exemplos verdadeiros e completar reflexão pessoal de 10–20 linhas.
-- [ ] Gravar vídeo de 5–8 minutos com tela e narração; mostrar execução do ETL, trecho de código aceito da IA, sugestão rejeitada, testes e consultas de validação.
-- [ ] Publicar o vídeo com link público acessível sem login e inserir o link abaixo.
-- [ ] Enviar este resumo como `ENTREGA.md` ou PDF no upload único do AI/R Learning.
+- [x] Repositório pessoal no GitHub: https://github.com/Viuutu/desafio-final-verdejar
+- [x] Branch de trabalho publicada: `codex/desafio-final-verdejar`.
+- [x] Pull Request aberto para `main`: https://github.com/Viuutu/desafio-final-verdejar/pull/1
+- [x] Código, contrato, consultas, testes, guia, registro de IA e planilha no repositório.
 
-## Resumo para copiar ao completar
+## O que ainda depende do Fellow
+
+- [ ] Revisar `COMO_USEI_IA.md` para que cada exemplo corresponda a uma interação real, incluindo trechos, motivos e validação; explicar com honestidade o escopo de ajuda usado.
+- [ ] Escrever a reflexão pessoal final, com 10–20 linhas, respondendo: qual foi a decisão mais difícil do ETL e por quê; o que foi delegado à IA e o que você fez sozinho; o que mudaria primeiro com mais uma semana.
+- [ ] Gravar a defesa de 5–8 minutos, com tela e narração, seguindo a ordem exigida no `GUIA_DE_DEFESA.md`.
+- [ ] Publicar o vídeo com acesso público sem login e colar o link abaixo.
+- [ ] Revisar este arquivo, incluir a reflexão e uma cópia da seção final de `COMO_USEI_IA.md` e fazer o único upload no AI/R Learning.
+
+## Resumo para o upload
 
 **Pull Request:** https://github.com/Viuutu/desafio-final-verdejar/pull/1
 
-**Vídeo da defesa oral:** [cole o link público aqui]
+**Vídeo público da defesa oral:** PENDENTE — gravar e publicar.
 
-**Reflexão (10–20 linhas):** [inclua a resposta pessoal revisada de COMO_USEI_IA.md]
+**Reflexão pessoal (10–20 linhas):** PENDENTE — escrever após revisar a própria experiência.
 
-**Como usei IA:** [inclua a seção revisada de COMO_USEI_IA.md]
+**Como usei IA:** PENDENTE — copiar aqui a versão final e revisada de `COMO_USEI_IA.md`.
 
-> O código, os testes, as consultas, o contrato e o guia didático estão na pasta do projeto. Os links e as respostas pessoais não podem ser preenchidos sem a conta, a gravação e a experiência do Fellow.
+## Conferência final
+
+Antes de enviar, confirme que o vídeo pode ser aberto sem login, que o PR continua aberto e que este arquivo contém o link do vídeo, a reflexão e a seção de uso de IA. O briefing não exige que o PR esteja integrado à branch principal.

@@ -35,14 +35,18 @@ Para este conjunto de dados pequeno e completo, substituir as quatro tabelas den
 
 `tests/test_transformacao.py` tem casos de entrada e saída esperada para A1 a A6. `tests/test_extracao.py` simula duas páginas HTTP para provar que o laço percorre todas as páginas. `tests/test_reconciliacao.py` carrega duas vezes o mesmo conjunto e confirma que o pedido e o item continuam aparecendo uma única vez e que a soma bate.
 
-## Demonstração sugerida (5–8 minutos)
+## Roteiro da gravação (5–8 minutos)
 
-1. Inicie a API e execute `python -m etl.main --banco sqlite`.
-2. Explique as linhas de contadores e a reconciliação impressas no terminal.
-3. Abra uma função de transformação (sugestão: `calcular_valor_itens`) e explique entrada, cálculo e saída.
-4. Mostre no teste A6 como uma divergência é detectada.
-5. Rode `python -m pytest -q` e mostre o total de testes aprovados.
-6. Abra `consultas_validacao.sql` e explique a consulta de vendas mensais e por que sua soma precisa bater com a receita total.
+O briefing exige esta ordem. Faça uma gravação de ensaio antes da versão final e mantenha sua explicação em suas próprias palavras.
+
+1. **Execução do ETL (1–2 min):** mostre a API ativa em um terminal e execute `python -m etl.main --banco postgres` no outro. Explique os contadores A1–A6 e a reconciliação final. Não mostre senhas ou DSN com credenciais.
+2. **Trecho aceito da IA (1–1,5 min):** escolha um trecho que você realmente entende. Explique cada linha, a entrada, a saída e como você verificou o comportamento.
+3. **Sugestão rejeitada (1 min):** apresente uma sugestão real da IA, explique por que não se encaixava no contrato e mostre a alternativa implementada.
+4. **Testes (1–1,5 min):** execute `python -m pytest -q`, mostre a saída e explique um teste que falhou durante o desenvolvimento e como essa falha foi corrigida. Use uma falha que realmente aconteceu; se não encontrar o registro, não invente uma e peça orientação à coordenação.
+5. **Consultas (1 min):** abra `consultas_validacao.sql`, mostre as vendas por mês e a conferência: soma dos meses = soma geral de `valor_total` = R$ 312.047,75. Explique também um resultado por estado ou a consulta de pedidos divergentes.
+6. **Fechamento (30 s):** resuma a decisão técnica que considera mais importante e o que você aprendeu.
+
+Para demonstrar PostgreSQL, configure `VERDEJAR_DSN` conforme o README antes de gravar. O `--banco sqlite` é uma alternativa local; a entrega pede PostgreSQL como destino principal.
 
 ## Perguntas que podem surgir
 
@@ -58,4 +62,4 @@ Para este conjunto de dados pequeno e completo, substituir as quatro tabelas den
 
 ## Itens ainda pessoais
 
-O vídeo público, o link do Pull Request na conta do aluno e a reflexão sobre decisões pessoais precisam ser produzidos/revisados por você. Não invente uma experiência de IA: preencha `COMO_USEI_IA.md` com interações reais e grave a defesa com as suas próprias palavras. O arquivo `ENTREGA.md` lista esses itens para finalizar.
+O vídeo público e a reflexão ainda precisam ser produzidos pelo Fellow. O Pull Request já está aberto e o link está em `ENTREGA.md`. Revise `COMO_USEI_IA.md` com interações e decisões reais; não afirme que corrigiu uma falha ou rejeitou uma sugestão se isso não aconteceu. O arquivo `ENTREGA.md` lista o conteúdo do upload único.
