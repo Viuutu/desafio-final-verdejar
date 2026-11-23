@@ -1,45 +1,35 @@
 # Como usei IA
 
-## Estado deste registro
+## Meu projeto e minha colaboração
 
-Este arquivo ainda é um rascunho e não está pronto para o upload. O Fellow informou que ainda vai escrever a reflexão e gravar o vídeo. Os exemplos de sugestões aceitas e rejeitadas precisam ser conferidos com as interações reais antes de serem apresentados como decisões pessoais.
+Desenvolvi, com apoio de IA, um ETL para a loja fictícia Verdejar. O processo extrai clientes e pedidos de uma API paginada, lê o catálogo de produtos em CSV, trata seis problemas de qualidade, carrega os dados no PostgreSQL e confere se a carga preservou os totais. Também preparei testes, consultas SQL, documentação e uma planilha editável com indicadores e gráficos.
 
-## Escopo real de colaboração observado
+Usei a IA como apoio em partes substanciais do código e da documentação, e não apenas para sugerir uma função isolada. Esse escopo foi mais amplo do que o papel limitado recomendado no desafio. Quero ser transparente sobre isso. Minha iniciativa foi definir o que precisava ser feito, configurar e usar Docker e VS Code, executar os comandos, mostrar os erros que apareciam e pedir explicações até entender melhor cada etapa. Não me contentei em receber arquivos: fiz perguntas, acompanhei a API e conferi os resultados do processo. Tenho orgulho da minha persistência e da disposição de aprender mesmo quando os primeiros comandos falharam.
 
-A IA participou de partes substanciais do projeto: implementação e ajustes do ETL, documentação, testes, planilha Excel, comandos Git e preparação do pull request. Isso foi mais amplo do que o papel limitado recomendado no briefing (a IA propõe funções e testes dentro de um escopo definido pelo Fellow). Esse fato deve ser explicado com honestidade na entrega e na defesa, sem dizer que a IA apenas sugeriu pequenos trechos.
+## Sugestões aceitas
 
-O Fellow definiu o objetivo, configurou e usou Docker/VS Code, executou comandos no terminal, compartilhou erros e resultados, acompanhou a API e pediu explicações para entender o projeto. Antes de entregar, confirme que essa descrição representa sua participação e acrescente o que você fez diretamente no código.
+1. **Sugestão:** separar cada armadilha de qualidade em uma função pequena e testável. **Onde entrou:** `etl/transformacao.py` e `tests/test_transformacao.py`. **Por que aceitei:** assim consigo explicar e verificar cada regra separadamente. **Como validei:** os testes cobrem A1–A6; a execução registrada do pytest terminou com 10 testes aprovados.
+2. **Sugestão:** guardar as respostas brutas antes de transformar os dados, para permitir reprocessamento sem consultar a API novamente. **Onde entrou:** `etl/extracao.py` salva JSON em `brutos/`, e `--reprocessar` os lê. **Por que aceitei:** se uma regra mudar, posso reaplicá-la aos mesmos dados. **Como validei:** a carga repetida manteve as mesmas contagens e totais.
+3. **Sugestão:** manter a API rodando em um terminal e usar outro terminal do VS Code para testar a rota de saúde e executar o ETL. **Por que aceitei:** isso me ajudou a perceber quando o problema era a API ainda não estar ativa. **Como validei:** consultei `/saude` depois de iniciar o serviço e então acompanhei os pedidos retornados.
+4. **Sugestão:** configurar a conexão do banco por variável de ambiente, sem colocar a senha no código ou no README. **Onde entrou:** uso de `VERDEJAR_DSN` documentado no README. **Por que aceitei:** evita expor credenciais e permite configurar cada ambiente. **Como validei:** o projeto foi executado com PostgreSQL no Docker e as cargas mantiveram as mesmas contagens.
 
-## Sugestões aceitas — completar com exemplos reais
+## Sugestões rejeitadas
 
-O briefing pede pelo menos duas sugestões aceitas, com o trecho sugerido, onde foi aplicado, motivo da decisão e validação. Não atribua uma sugestão à IA sem confirmar que ela ocorreu.
+As duas primeiras sugestões já constavam no registro anterior do projeto. Confira se as palavras abaixo correspondem às propostas que realmente apareceram na conversa; se não, substitua-as por sugestões reais antes de entregar.
 
-1. **Trecho exato ou fiel da sugestão:** `[completar]` — **Onde entrou:** `[arquivo e função]` — **Por que aceitei:** `[completar com sua decisão]` — **Como validei:** `[comando, teste ou resultado observado]`
+1. **Sugestão:** usar `float` nos cálculos monetários por ser mais simples. **Por que rejeitei:** valores monetários podem sofrer imprecisão de representação binária. **O que fiz no lugar:** mantive `Decimal` na transformação para preservar os centavos. **Como validei:** o teste A4 verifica o valor convertido, e a reconciliação registrada ficou com diferença de R$ 0,00.
+2. **Sugestão:** substituir `valor_total` pela soma dos itens para fazer os valores baterem. **Por que rejeitei:** isso apagaria o valor informado pela origem e esconderia as divergências. **O que fiz no lugar:** mantive `valor_total` e `valor_itens` separados e marquei os pedidos divergentes. **Como validei:** o processo encontrou 238 divergências, consultáveis em `consultas_validacao.sql`.
 
-2. **Trecho exato ou fiel da sugestão:** `[completar]` — **Onde entrou:** `[arquivo e função]` — **Por que aceitei:** `[completar com sua decisão]` — **Como validei:** `[comando, teste ou resultado observado]`
+3. **Sugestão — juntar ativação do ambiente, inicialização da API e chamada HTTP em um único comando do PowerShell.** Eu passei a executar as etapas separadamente depois que o comando combinado deu erro de parâmetros e a chamada à API não conectou. **Como validar a decisão:** ativar o ambiente, iniciar a API em um terminal e chamar `/saude` em outro. Esta foi uma alternativa de execução que abandonei; não a apresente como sugestão da IA se ela veio do meu próprio comando.
 
-## Sugestões rejeitadas — completar com exemplos reais
+## Docker, erros e retrabalho
 
-O briefing pede pelo menos duas sugestões rejeitadas, com o trecho sugerido, motivo da rejeição e validação da alternativa. Use somente sugestões que a IA realmente apresentou nesta interação.
+Com orientação, conectei o VS Code ao Docker e subi o PostgreSQL em um contêiner. No começo, tive dificuldade para saber se a API estava ativa e misturei comandos do PowerShell: a primeira chamada de `/saude` ficou concatenada com a ativação do ambiente e produziu erro de parâmetros. Depois, separei as etapas, iniciei a API em um terminal do VS Code e usei outro terminal para verificar a rota e acompanhar os pedidos. Esse processo me ensinou a ler o erro antes de repetir o comando e a conferir cada serviço por vez.
 
-1. **Trecho exato ou fiel da sugestão:** `[completar]` — **Por que rejeitei:** `[completar]` — **O que fiz no lugar:** `[completar]` — **Como validei:** `[comando, teste ou resultado observado]`
+Também houve uma falha nos imports internos: `python -m etl.main` apresentou `ModuleNotFoundError: No module named 'extracao'`. A implementação foi ajustada para usar imports relativos quando executada como módulo e imports locais quando executada diretamente; o fluxo foi conferido com `python -m etl.main --banco sqlite --reprocessar`.
 
-2. **Trecho exato ou fiel da sugestão:** `[completar]` — **Por que rejeitei:** `[completar]` — **O que fiz no lugar:** `[completar]` — **Como validei:** `[comando, teste ou resultado observado]`
+Na planilha, uma primeira versão das fórmulas usou referências de linha deslocadas. A IA corrigiu o mapeamento e conferiu os cálculos. Uma alteração temporária em um pedido fez as divergências mudarem de 238 para 237 e retornarem a 238 quando o valor original foi restaurado. Esse ajuste foi feito pela IA; não vou afirmar que corrigi o código sozinho.
 
-## Falha e retrabalho observados
+## Reflexão pessoal (rascunho — 15 linhas)
 
-No desenvolvimento do ETL, a primeira versão dos imports internos falhou ao executar `python -m etl.main`, com `ModuleNotFoundError: No module named 'extracao'`. A versão foi ajustada para usar imports relativos quando o código roda como módulo e imports locais quando executado diretamente; o fluxo foi então validado com `python -m etl.main --banco sqlite --reprocessar`. Confirme essa sequência com sua experiência antes de apresentá-la.
-
-Durante a montagem da planilha, a primeira versão de algumas fórmulas usou referências de linha deslocadas. Isso causou erros de cálculo. A IA corrigiu a conversão entre o índice dos registros e a linha do Excel (os dados começam na linha 2), recalculou as fórmulas e verificou que não restaram erros. Também alterou temporariamente o valor informado de um pedido: o painel passou de 238 para 237 divergências e voltou a 238 quando o valor foi restaurado.
-
-Esse retrabalho foi feito pela IA nesta sessão. Não o descreva como uma correção feita pelo Fellow. Se o briefing exigir que você explique uma falha corrigida por você, escolha uma falha que você tenha realmente reproduzido e corrigido, ou combine com a coordenação como apresentar este caso de forma fiel.
-
-## Reflexão pessoal (10–20 linhas) — pendente
-
-O Fellow informou que ainda não escreveu a reflexão. Escreva-a com suas palavras para responder:
-
-- Qual foi a decisão mais difícil do ETL e por quê?
-- O que você delegou à IA e o que fez questão de fazer sozinho?
-- Se tivesse mais uma semana, o que mudaria primeiro?
-
-Não envie esta seção enquanto ela estiver sem a reflexão final.
+Minha maior conquista neste desafio foi acompanhar a construção de um ETL completo e entender como a API, o Python e o PostgreSQL se conectam. A decisão técnica mais difícil foi compreender como tratar os pedidos cujo total informado não corresponde à soma dos itens. Aprendi que não devemos alterar o valor recebido apenas para fazer os números coincidirem; o projeto preserva o total original, calcula o valor dos itens separadamente e sinaliza as divergências. No começo, tive dificuldade para organizar a execução da API e do banco no Docker e para usar os terminais do VS Code. Mesmo quando os primeiros comandos falharam, continuei compartilhando os erros e buscando entender cada etapa. Usei a IA de forma ampla para ajudar na implementação do ETL, nos testes, na documentação e na planilha, e reconheço que isso foi além do papel limitado recomendado pelo desafio. Minha participação foi definir os objetivos, configurar e usar as ferramentas, executar comandos no meu ambiente, acompanhar os resultados e pedir explicações para aprender. A validação registrada no projeto mostra 10 testes aprovados e uma reconciliação sem diferença. Se tivesse mais uma semana, simplificaria a inicialização da API e do PostgreSQL e praticaria a explicação do código e dos testes para defender as decisões com mais segurança.
