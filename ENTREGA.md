@@ -25,9 +25,22 @@ O briefing pede um único upload no AI/R Learning contendo o link do PR, o link 
 
 **Vídeo público da defesa oral:** PENDENTE — gravar e publicar.
 
-**Reflexão pessoal (10–20 linhas):** aprovada; copiar a versão final de `COMO_USEI_IA.md` para este pacote de entrega.
+##Reflexão pessoal
 
-**Como usei IA:** texto aprovado; copiar a seção final de `COMO_USEI_IA.md` para este pacote de entrega.
+Quando comecei este desafio, eu ainda não sabia muito bem como uma API, um programa em Python e um banco de dados trabalhavam juntos.
+Ao longo do projeto, fui acompanhando a montagem do ETL e comecei a entender o caminho que os dados percorrem.
+Uma das partes que mais me confundiu foi descobrir por que alguns totais dos pedidos não batiam com a soma dos itens.
+Depois entendi que corrigir o total recebido só para os números coincidirem esconderia uma informação importante.
+Por isso, o projeto mantém o valor informado pela origem, calcula a soma dos itens separadamente e sinaliza as diferenças.
+Também tive dificuldade para organizar os terminais do VS Code, iniciar a API e conectar o PostgreSQL no Docker.
+Quando um comando falhou, precisei parar, olhar a mensagem e tentar entender o que estava acontecendo em vez de apenas repetir.
+Usei a IA em partes importantes do código, dos testes, da documentação e da planilha, e reconheço que essa ajuda foi ampla.
+Isso foi além do papel limitado recomendado no desafio, então quero ser transparente sobre como trabalhei.
+Minha contribuição foi definir o que eu precisava entregar, configurar as ferramentas, executar os passos e trazer minhas dúvidas e resultados.
+Ainda estou aprendendo, mas hoje consigo explicar melhor como a extração, a transformação, a carga e a validação se conectam.
+Na revisão atual, os 11 testes passaram; a reconciliação registrada para o banco teve diferença de R$ 0,00.
+Se eu tivesse mais uma semana, deixaria a inicialização dos serviços mais simples e praticaria a apresentação do projeto.
+Antes da defesa, quero revisar as decisões com calma para conseguir explicá-las com minhas palavras, sem apenas ler o código. O que mais levo deste desafio é que pedir ajuda também exige conferir o resultado e assumir responsabilidade pelo que vou apresentar.
 
 ## Conferência do vídeo
 
