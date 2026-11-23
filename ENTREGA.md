@@ -18,9 +18,3 @@ O briefing pede um único upload no AI/R Learning até **25/11/2026, às 23h59 (
 **Vídeo público da defesa oral:** PENDENTE — gravar e publicar.
 
 
-
-**Como usei IA:** PENDENTE — copiar aqui a versão final e revisada de `COMO_USEI_IA.md`.
-
-## Conferência final
-
-Antes de enviar, confirme que o vídeo pode ser aberto sem login, que o PR continua aberto e que este arquivo contém o link do vídeo, a reflexão e a seção de uso de IA. O briefing não exige que o PR esteja integrado à branch principal.
