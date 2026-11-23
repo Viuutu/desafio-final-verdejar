@@ -12,7 +12,7 @@ O pipeline busca todas as páginas de clientes e pedidos na API local, guarda um
 2. **Leitura do catálogo — `etl/main.py`:** `csv.DictReader` lê o cabeçalho do CSV e converte `produto_id` para inteiro e preço para número.
 3. **Transformação — `etl/transformacao.py`:** funções pequenas recebem um registro e aplicam uma regra. Isso facilita testar cada armadilha sem API nem banco.
 4. **Carga — `etl/carga.py`:** primeiro produtos, depois clientes, depois pedidos e seus itens. Assim, cada chave estrangeira já aponta para uma linha existente. SQL parametrizado mantém valores separados do comando SQL.
-5. **Reconciliação — `etl/main.py`:** soma `valor_itens` nos dados transformados e consulta a mesma soma no banco. Diferença acima de um centavo faz o programa terminar com erro.
+5. **Reconciliação — `etl/main.py`:** compara as contagens esperadas das quatro tabelas com o banco e compara a soma de `valor_itens` da origem com a soma no destino. Contagem diferente ou diferença monetária acima de um centavo faz o programa terminar com erro.
 
 ## As seis armadilhas e como explicar
 
@@ -25,7 +25,7 @@ O pipeline busca todas as páginas de clientes e pedidos na API local, guarda um
 
 ## Por que há duas opções de banco?
 
-PostgreSQL é o destino principal e usa o esquema original. SQLite é a contingência documentada no pacote de insumos; permite demonstrar localmente relacionamentos, transação, carga e reconciliação sem instalar um servidor. A carga PostgreSQL usa `psycopg2-binary` e o DSN vem de `VERDEJAR_DSN`.
+PostgreSQL é o destino principal e usa o esquema original. SQLite é a contingência documentada no pacote de insumos; permite demonstrar localmente relacionamentos, transação, carga e reconciliação sem instalar um servidor. A dependência PostgreSQL do projeto é `psycopg[binary]`, e o DSN deve vir de `VERDEJAR_DSN` ou do argumento `--dsn`; o código não deve conter uma senha padrão.
 
 ## Por que apagar e recarregar?
 
@@ -33,7 +33,7 @@ Para este conjunto de dados pequeno e completo, substituir as quatro tabelas den
 
 ## Como explicar os testes
 
-`tests/test_transformacao.py` tem casos de entrada e saída esperada para A1 a A6. `tests/test_extracao.py` simula duas páginas HTTP para provar que o laço percorre todas as páginas. `tests/test_reconciliacao.py` carrega duas vezes o mesmo conjunto e confirma que o pedido e o item continuam aparecendo uma única vez e que a soma bate.
+`tests/test_transformacao.py` tem casos de entrada e saída esperada para A1 a A6 e verifica que os registros de entrada não são alterados. `tests/test_extracao.py` simula duas páginas HTTP para provar que o laço percorre todas as páginas. `tests/test_reconciliacao.py` carrega duas vezes o mesmo conjunto e compara as contagens das tabelas com as quantidades de origem, além de conferir a soma de `valor_itens`.
 
 ## Roteiro da gravação (5–8 minutos)
 
@@ -62,4 +62,4 @@ Para demonstrar PostgreSQL, configure `VERDEJAR_DSN` conforme o README antes de 
 
 ## Itens ainda pessoais
 
-O vídeo público e a reflexão ainda precisam ser produzidos pelo Fellow. O Pull Request já está aberto e o link está em `ENTREGA.md`. Revise `COMO_USEI_IA.md` com interações e decisões reais; não afirme que corrigiu uma falha ou rejeitou uma sugestão se isso não aconteceu. O arquivo `ENTREGA.md` lista o conteúdo do upload único.
+O vídeo público ainda precisa ser gravado e publicado. A reflexão está em rascunho e precisa ser revisada pelo Fellow. O Pull Request #1 já foi integrado e o link está em `ENTREGA.md`. Revise `COMO_USEI_IA.md` com interações e decisões reais; não afirme que corrigiu uma falha ou rejeitou uma sugestão se isso não aconteceu. O arquivo `ENTREGA.md` lista o conteúdo do upload único.

@@ -13,10 +13,24 @@ def test_carga_sqlite_idempotente_e_reconciliada(tmp_path):
         [{"produto_id": 1, "nome": "P", "categoria": "frutas", "preco_base": 5.0}])
     dbfile = str(tmp_path / "test.db")
     schema = "insumos/schema_sqlite.sql"
+    expected_counts = {
+        "clientes": len(dados["clientes"]),
+        "produtos": len(dados["produtos"]),
+        "pedidos": len(dados["pedidos"]),
+        "itens_pedido": sum(len(p["itens"]) for p in dados["pedidos"]),
+    }
+    expected_total = sum((p["valor_itens"] for p in dados["pedidos"]), Decimal("0.00"))
+    executions = []
     for _ in range(2):
-        db = carregar_sqlite(dbfile, dados, schema); db.close()
-    db = sqlite3.connect(dbfile)
-    assert db.execute("SELECT COUNT(*) FROM pedidos").fetchone()[0] == 1
-    assert db.execute("SELECT COUNT(*) FROM itens_pedido").fetchone()[0] == 1
-    assert Decimal(str(db.execute("SELECT SUM(valor_itens) FROM pedidos").fetchone()[0])) == Decimal("10.0")
-    db.close()
+        db = carregar_sqlite(dbfile, dados, schema)
+        try:
+            counts = {table: db.execute("SELECT COUNT(*) FROM " + table).fetchone()[0]
+                      for table in expected_counts}
+            total = db.execute("SELECT SUM(valor_itens) FROM pedidos").fetchone()[0]
+            executions.append((counts, Decimal(str(total))))
+        finally:
+            db.close()
+
+    assert executions[0] == executions[1]
+    assert executions[0][0] == expected_counts
+    assert abs(executions[0][1] - expected_total) <= Decimal("0.01")

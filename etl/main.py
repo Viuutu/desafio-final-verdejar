@@ -6,6 +6,7 @@ import json
 import os
 import sqlite3
 import sys
+from decimal import Decimal
 
 try:  # execucao como modulo
     from .extracao import ErroExtracao, consumir_rota, salvar_bruto
@@ -51,15 +52,24 @@ def executar(args):
         db = carregar_postgres(args.dsn, dados)
     try:
         c = db.cursor()
-        counts = {t: c.execute("SELECT COUNT(*) FROM " + t).fetchone()[0]
-                  for t in ("clientes", "produtos", "pedidos", "itens_pedido")}
-        origem = sum(float(p["valor_itens"]) for p in dados["pedidos"])
-        destino = c.execute("SELECT COALESCE(SUM(valor_itens),0) FROM pedidos").fetchone()[0]
-        dif = abs(origem - float(destino))
+        tabelas = ("clientes", "produtos", "pedidos", "itens_pedido")
+        counts = {t: c.execute("SELECT COUNT(*) FROM " + t).fetchone()[0] for t in tabelas}
+        expected_counts = {
+            "clientes": len(dados["clientes"]),
+            "produtos": len(dados["produtos"]),
+            "pedidos": len(dados["pedidos"]),
+            "itens_pedido": sum(len(p["itens"]) for p in dados["pedidos"]),
+        }
+        contagens_ok = counts == expected_counts
+        origem = sum((p["valor_itens"] for p in dados["pedidos"]), Decimal("0.00"))
+        destino_raw = c.execute("SELECT COALESCE(SUM(valor_itens),0) FROM pedidos").fetchone()[0]
+        destino = Decimal(str(destino_raw))
+        dif = abs(origem - destino)
         print("carga: clientes={} produtos={} pedidos={} itens={}".format(counts["clientes"], counts["produtos"], counts["pedidos"], counts["itens_pedido"]))
-        print("reconciliacao: soma_valor_itens_origem={:.2f} soma_valor_itens_destino={:.2f} diferenca={:.2f}".format(origem, float(destino), dif))
+        print("reconciliacao: pedidos_origem_unicos={} pedidos_destino={} contagens_ok={} soma_valor_itens_origem={:.2f} soma_valor_itens_destino={:.2f} diferenca={:.2f}".format(
+            expected_counts["pedidos"], counts["pedidos"], contagens_ok, origem, destino, dif))
         print("divergentes: {} pedidos com valor_total diferente da soma dos itens".format(cont["pedidos_divergentes"]))
-        return 0 if dif <= 0.01 else 1
+        return 0 if contagens_ok and dif <= Decimal("0.01") else 1
     finally:
         db.close()
 
@@ -73,10 +83,13 @@ def main():
     ap.add_argument("--reprocessar", action="store_true")
     ap.add_argument("--banco", choices=("postgres", "sqlite"), default="sqlite")
     ap.add_argument("--sqlite", default=os.path.join(raiz, "verdejar.db"))
-    ap.add_argument("--dsn", default=os.environ.get("VERDEJAR_DSN", "dbname=verdejar user=postgres password=postgres host=localhost port=5432"))
+    ap.add_argument("--dsn", default=os.environ.get("VERDEJAR_DSN"))
     ap.add_argument("--produtos", default=os.path.join(raiz, "insumos", "dados", "produtos.csv"))
     ap.add_argument("--schema-sqlite", default=os.path.join(raiz, "insumos", "schema_sqlite.sql"))
-    sys.exit(executar(ap.parse_args()))
+    args = ap.parse_args()
+    if args.banco == "postgres" and not args.dsn:
+        ap.error("configure VERDEJAR_DSN ou informe --dsn para usar PostgreSQL")
+    sys.exit(executar(args))
 
 
 if __name__ == "__main__": main()

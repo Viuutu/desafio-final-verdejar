@@ -7,7 +7,7 @@ Pipeline em Python que lê clientes e pedidos da API local paginada, preserva os
 - `insumos/`: cópia dos dados, API e esquemas recebidos.
 - `etl/`: extração, transformação, carga e orquestração.
 - `brutos/`: respostas da API para reprocessamento (gerado localmente, ignorado pelo Git).
-- `tests/`: dez testes com pytest, cobrindo A1–A6, paginação e reconciliação.
+- `tests/`: onze testes com pytest, cobrindo A1–A6, paginação, imutabilidade das transformações e reconciliação.
 - `CONTRATO_DE_DADOS.md`: campos, tipos, nulabilidade e regras.
 - `consultas_validacao.sql`: as três consultas pedidas.
 - `GUIA_DE_DEFESA.md`: explicação didática e roteiro para apresentação.
@@ -76,6 +76,15 @@ O destino SQLite usa `insumos/schema_sqlite.sql`; PostgreSQL usa o esquema ofici
 
 Para validar a carga PostgreSQL, o ETL foi executado duas vezes no contêiner local; as contagens e a reconciliação permaneceram iguais. A API foi iniciada no terminal do VS Code e a rota `/saude` foi verificada durante a demonstração local.
 
+Resumo das duas execuções consecutivas no PostgreSQL:
+
+| Execução | Clientes | Produtos | Pedidos únicos | Itens | Divergentes | Diferença de reconciliação |
+|---|---:|---:|---:|---:|---:|---:|
+| 1 | 1.000 | 12 | 5.000 | 12.455 | 238 | R$ 0,00 |
+| 2 | 1.000 | 12 | 5.000 | 12.455 | 238 | R$ 0,00 |
+
+As contagens iguais demonstram a idempotência da carga; a diferença zero demonstra a reconciliação dos valores dos itens.
+
 ## Testes
 
 ```powershell
@@ -84,11 +93,11 @@ python -m pytest -q
 
 Os testes cobrem as armadilhas A1–A6, a paginação e a carga/reconciliação idempotente. O teste de extração simula respostas de duas páginas, sem depender de uma porta de rede local.
 
-Saída registrada nesta revisão:
+Saída da revisão atual:
 
 ```text
-..........                                                               [100%]
-10 passed in 0.48s
+...........                                                              [100%]
+11 passed
 ```
 
 ## Resultados calculados com os dados da seed 2026
@@ -111,7 +120,7 @@ Execução sobre os JSON fornecidos. A carga foi executada duas vezes em SQLite 
 | Soma de `valor_itens` na origem transformada | R$ 311.228,75 |
 | Soma de `valor_itens` no banco | R$ 311.228,75 |
 | Diferença de reconciliação | R$ 0,00 |
-| Testes aprovados | 10 |
+| Testes aprovados | 11 |
 
 Vendas por mês (soma de `valor_total`): janeiro R$ 30.449,02; fevereiro R$ 33.923,86; março R$ 30.678,70; abril R$ 31.253,96; maio R$ 30.890,02; junho R$ 31.627,73; julho R$ 32.796,17; agosto R$ 29.328,04; setembro R$ 29.995,71; outubro R$ 31.104,54. A soma dos meses é R$ 312.047,75. Ela difere da soma de `valor_itens` porque 238 pedidos têm divergências entre o total informado e os itens.
 

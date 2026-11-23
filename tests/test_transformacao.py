@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+from copy import deepcopy
 from decimal import Decimal
 
 from etl.transformacao import (calcular_valor_itens, converter_data_pedido,
-    converter_valor_total, deduplicar_pedidos, normalizar_email, normalizar_estado)
+    converter_valor_total, deduplicar_pedidos, normalizar_email, normalizar_estado,
+    transformar)
 
 
 def test_a1_email_ausente_permanece_nulo():
@@ -48,3 +50,17 @@ def test_a6_diferenca_maior_que_centavo_e_divergente():
     pedido = {"valor_total": Decimal("11.00"), "itens": [{"quantidade": 1, "preco_unitario": 10.0}]}
     pedido, _ = calcular_valor_itens(pedido)
     assert pedido["divergente"] is True
+
+
+def test_funcoes_de_transformacao_nao_alteram_os_registros_de_entrada():
+    cliente = {"email": None, "estado": "rs"}
+    pedido = {"id": 1, "data_pedido": "01/01/2026", "valor_total": "10,00",
+              "itens": [{"quantidade": 2, "preco_unitario": 5.0}]}
+    clientes = [cliente]
+    pedidos = [pedido]
+    produtos = [{"produto_id": 1, "nome": "P", "categoria": "frutas", "preco_base": 5.0}]
+    originais = deepcopy((clientes, pedidos, produtos))
+
+    transformar(clientes, pedidos, produtos)
+
+    assert (clientes, pedidos, produtos) == originais
