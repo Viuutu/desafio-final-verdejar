@@ -1,6 +1,6 @@
 # Entrega do desafio final
 
-O briefing pede um único upload no AI/R Learning até **24/11/2026, às 23h59 (horário de Brasília)**. Envie este arquivo depois de substituir os campos pendentes pela reflexão final e pelo link público do vídeo. Inclua também uma cópia final da seção “Como usei IA”.
+O briefing pede um único upload no AI/R Learning até **25/11/2026, às 23h59 (horário de Brasília)**. Envie este arquivo depois de substituir os campos pendentes pela reflexão final e pelo link público do vídeo. Inclua também uma cópia final da seção “Como usei IA”.
 
 ## O que já está publicado
 
