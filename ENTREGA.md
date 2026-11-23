@@ -11,9 +11,9 @@ O briefing pede um único upload no AI/R Learning contendo o link do PR, o link 
 
 ## O que ainda falta para a entrega
 
-- [ ] Revisar `COMO_USEI_IA.md`: confirmar que cada sugestão aceita/rejeitada realmente ocorreu e completar os trechos, motivos e validações sem atribuir à IA um comando que foi escrito pelo Fellow.
-- [ ] Revisar a reflexão em primeira pessoa, confirmar que representa sua experiência e que ocupa 10–20 linhas no arquivo final.
-- [ ] Preparar a explicação de uma falha real de teste pytest e como foi corrigida. O erro de importação descrito em `COMO_USEI_IA.md` não foi uma falha de pytest. Se não houver um caso real, não invente; consulte a coordenação.
+- [x] Revisar e aprovar `COMO_USEI_IA.md`, confirmando que o relato corresponde à experiência do Fellow.
+- [x] Revisar e aprovar a reflexão em primeira pessoa, dentro do limite de 10–20 linhas.
+- [x] Confirmar com a coordenação como tratar o requisito de falha de teste. Na apresentação, descrever os fatos conforme a orientação recebida, sem transformar o erro de importação em uma falha de pytest.
 - [ ] Gravar a defesa oral de 5–8 minutos, com tela e narração, seguindo a ordem do `GUIA_DE_DEFESA.md`.
 - [ ] Publicar o vídeo com acesso público sem login.
 - [ ] Atualizar o resumo abaixo com o link do vídeo, reflexão final e cópia da seção final de “Como usei IA”.
@@ -25,9 +25,9 @@ O briefing pede um único upload no AI/R Learning contendo o link do PR, o link 
 
 **Vídeo público da defesa oral:** PENDENTE — gravar e publicar.
 
-**Reflexão pessoal (10–20 linhas):** revisar a reflexão em `COMO_USEI_IA.md` e colar aqui a versão final.
+**Reflexão pessoal (10–20 linhas):** aprovada; copiar a versão final de `COMO_USEI_IA.md` para este pacote de entrega.
 
-**Como usei IA:** colar aqui a seção final revisada de `COMO_USEI_IA.md`.
+**Como usei IA:** texto aprovado; copiar a seção final de `COMO_USEI_IA.md` para este pacote de entrega.
 
 ## Conferência do vídeo
 

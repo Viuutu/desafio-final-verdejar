@@ -29,7 +29,7 @@ Também houve uma falha nos imports internos: `python -m etl.main` apresentou `M
 
 Na planilha, uma primeira versão das fórmulas usou referências de linha deslocadas. A IA corrigiu o mapeamento e conferiu os cálculos. Uma alteração temporária em um pedido fez as divergências mudarem de 238 para 237 e retornarem a 238 quando o valor original foi restaurado. Esse ajuste foi feito pela IA; não vou afirmar que corrigi o código sozinho.
 
-## Reflexão pessoal (rascunho)
+## Reflexão pessoal
 
 Quando comecei este desafio, eu ainda não sabia muito bem como uma API, um programa em Python e um banco de dados trabalhavam juntos.<br>
 Ao longo do projeto, fui acompanhando a montagem do ETL e comecei a entender o caminho que os dados percorrem.<br>
