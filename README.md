@@ -58,7 +58,7 @@ Suba PostgreSQL local pelo método escolhido no desafio. Para Docker:
 docker run --name verdejar-pg -e POSTGRES_PASSWORD=troque_esta_senha -e POSTGRES_DB=verdejar -p 5432:5432 -d postgres:16
 ```
 
-Instale as dependências e configure uma variável de ambiente com os dados de conexão (não coloque senha no código, Git ou README):
+Instale as dependências e configure uma variável de ambiente com os dados de conexão:
 
 ```powershell
 python -m pip install -r requirements.txt
@@ -122,7 +122,3 @@ Pedidos por estado do cliente: MG 476; PR 974; RS 1.543; SC 1.127; SP 880. A con
 A carga apaga e recria o conjunto completo em uma transação para oferecer resultado repetível em um dataset didático. Dados brutos são guardados antes de transformar. O campo original `valor_total` é preservado; `valor_itens` é calculado separadamente e divergências são sinalizadas, sem correção silenciosa.
 
 A conexão à API local não fica disponível em todas as sessões de execução deste projeto. A rota `/saude` e a demonstração da API foram verificadas no terminal do VS Code; a paginação também tem um teste automatizado com respostas simuladas. Para reproduzir a demonstração, mantenha a API ativa em um terminal e execute o ETL em outro.
-
-## Próximos passos do Fellow
-
-O Pull Request já está aberto: https://github.com/Viuutu/desafio-final-verdejar/pull/1. Antes do upload, leia `ENTREGA.md`, finalize a reflexão pessoal (10–20 linhas), confira `COMO_USEI_IA.md` com base nas interações reais e grave/publique o vídeo de 5–8 minutos. O roteiro técnico está em `GUIA_DE_DEFESA.md`; personalize-o para falar com suas palavras.
