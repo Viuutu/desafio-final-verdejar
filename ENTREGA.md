@@ -1,6 +1,6 @@
 # Entrega do desafio final
 
-O briefing pede um único upload no AI/R Learning contendo o link do PR, o link público do vídeo, uma cópia de “Como usei IA” e a reflexão pessoal. A cópia atual do PDF informa prazo de **24/11/2026, às 23h59 (horário de Brasília)**; uma atualização anterior deste arquivo no GitHub indicou 25/11. Confirme com a coordenação se houve extensão oficial.
+O briefing pede um único upload no AI/R Learning contendo o link do PR, o link público do vídeo, uma cópia de “Como usei IA” e a reflexão pessoal. Conforme a atualização informada pelo Fellow, o prazo foi alterado para **25/11/2026, às 23h59 (horário de Brasília)**.
 
 ## O que já foi publicado
 
