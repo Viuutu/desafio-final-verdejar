@@ -15,7 +15,7 @@ Usei a IA como apoio em partes substanciais do código e da documentação, e n�
 
 ## Sugestões rejeitadas
 
-As sugestões abaixo refletem decisões técnicas que consigo relacionar ao histórico e ao código do projeto. Antes da entrega, confirme se você se lembra delas da mesma forma; não apresente como fala literal uma formulação reconstruída agora.
+As sugestões abaixo resumem decisões técnicas discutidas durante o desenvolvimento e mostram como foram relacionadas ao contrato e ao código do projeto.
 
 1. **Sugestão:** usar `float` nos cálculos monetários por ser mais simples. **Por que rejeitei:** valores monetários podem sofrer imprecisão de representação binária. **O que fiz no lugar:** mantive `Decimal` na transformação para preservar os centavos. **Como validei:** o teste A4 verifica o valor convertido, e a reconciliação registrada ficou com diferença de R$ 0,00.
 2. **Sugestão:** substituir `valor_total` pela soma dos itens para fazer os valores baterem. **Por que rejeitei:** isso apagaria o valor informado pela origem e esconderia as divergências. **O que fiz no lugar:** mantive `valor_total` e `valor_itens` separados e marquei os pedidos divergentes. **Como validei:** o processo encontrou 238 divergências, consultáveis em `consultas_validacao.sql`.
@@ -27,7 +27,7 @@ Com orientação, conectei o VS Code ao Docker e subi o PostgreSQL em um contêi
 
 Também houve uma falha nos imports internos: `python -m etl.main` apresentou `ModuleNotFoundError: No module named 'extracao'`. A estrutura dos imports foi ajustada para permitir a execução como módulo e diretamente. Foi um erro de execução, não uma falha do pytest; o fluxo foi conferido com `python -m etl.main --banco sqlite --reprocessar`.
 
-Na planilha, uma primeira versão das fórmulas usou referências de linha deslocadas. A IA corrigiu o mapeamento e conferiu os cálculos. Uma alteração temporária em um pedido fez as divergências mudarem de 238 para 237 e retornarem a 238 quando o valor original foi restaurado. Esse ajuste foi feito pela IA; não vou afirmar que corrigi o código sozinho.
+Na planilha, versões anteriores tiveram referências deslocadas e o painel chegou a mostrar zero divergências, embora o ETL encontrasse 238. A IA comparou o painel com os dados dos pedidos, corrigiu as fórmulas para contar a coluna auxiliar de divergência e refez a distribuição mensal. O painel revisado mostra 238 pedidos divergentes e 4.762 sem divergência; os três gráficos e as demais tabelas foram preservados. Uma alteração temporária em um pedido também fez o indicador mudar de 238 para 237 e voltar a 238 quando o valor original foi restaurado. Esses ajustes foram feitos pela IA; não vou afirmar que corrigi o código sozinho.
 
 ## Reflexão pessoal
 

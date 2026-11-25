@@ -39,14 +39,14 @@ Para este conjunto de dados pequeno e completo, substituir as quatro tabelas den
 
 O briefing exige esta ordem. Faça uma gravação de ensaio antes da versão final e mantenha sua explicação em suas próprias palavras.
 
-1. **Execução do ETL (1–2 min):** mostre a API ativa em um terminal e execute `python -m etl.main --banco postgres` no outro. Explique os contadores A1–A6 e a reconciliação final. Não mostre senhas ou DSN com credenciais.
+1. **Execução do ETL (1–2 min):** mostre a API ativa em um terminal e execute o ETL no segundo terminal. Para demonstrar o destino PostgreSQL previsto no desafio, use `python -m etl.main --banco postgres` com o contêiner ativo. Se optar por SQLite para reduzir o uso do computador, use `python -m etl.main --banco sqlite --sqlite outputs\demonstracao_video.db` e diga claramente que essa gravação usa SQLite; não apresente SQLite como PostgreSQL. Explique os contadores A1–A6 e a reconciliação final. Não mostre senhas ou DSN com credenciais.
 2. **Trecho aceito da IA (1–1,5 min):** escolha um trecho que você realmente entende. Explique cada linha, a entrada, a saída e como você verificou o comportamento.
 3. **Sugestão rejeitada (1 min):** apresente uma sugestão real da IA, explique por que não se encaixava no contrato e mostre a alternativa implementada.
 4. **Testes (1–1,5 min):** execute `python -m pytest -q`, mostre a saída e explique um teste que falhou durante o desenvolvimento e como essa falha foi corrigida. Use uma falha que realmente aconteceu; se não encontrar o registro, não invente uma e peça orientação à coordenação.
-5. **Consultas (1 min):** abra `consultas_validacao.sql`, mostre as vendas por mês e a conferência: soma dos meses = soma geral de `valor_total` = R$ 312.047,75. Explique também um resultado por estado ou a consulta de pedidos divergentes.
+5. **Consultas (1 min):** abra `consultas_validacao.sql`, execute a primeira consulta no banco da demonstração e deixe o resultado visível. Para o banco SQLite, no terminal do VS Code, use `python -c "import sqlite3; c=sqlite3.connect('outputs/demonstracao_video.db'); q=open('consultas_validacao.sql', encoding='utf-8').read().split(';')[0]; print(c.execute(q).fetchall())"`. Mostre que a soma dos dez meses é R$ 312.047,75, igual à soma de `valor_total`. Explique também a consulta de pedidos divergentes, que retorna 238 registros.
 6. **Fechamento (30 s):** resuma a decisão técnica que considera mais importante e o que você aprendeu.
 
-Para demonstrar PostgreSQL, configure `VERDEJAR_DSN` conforme o README antes de gravar. O `--banco sqlite` é uma alternativa local; a entrega pede PostgreSQL como destino principal.
+Antes de gravar, abra a versão corrigida de `Verdejar_Resumo_ETL.xlsx`. No painel, confirme **238 pedidos divergentes** e **4.762 sem divergência**; a tabela mensal também precisa mostrar divergências distribuídas pelos meses. Se usar PostgreSQL, configure `VERDEJAR_DSN` conforme o README. Se usar SQLite, explique a escolha e confirme com a coordenação que a demonstração local atende ao requisito do desafio.
 
 ## Perguntas que podem surgir
 
@@ -62,4 +62,4 @@ Para demonstrar PostgreSQL, configure `VERDEJAR_DSN` conforme o README antes de 
 
 ## Itens ainda pessoais
 
-O vídeo público ainda precisa ser gravado e publicado. A reflexão está em rascunho e precisa ser revisada pelo Fellow. O Pull Request #1 já foi integrado e o link está em `ENTREGA.md`. Revise `COMO_USEI_IA.md` com interações e decisões reais; não afirme que corrigiu uma falha ou rejeitou uma sugestão se isso não aconteceu. O arquivo `ENTREGA.md` lista o conteúdo do upload único.
+O arquivo de vídeo já foi gravado, mas a versão atual precisa ser substituída antes da publicação: dura 8min23s, termina com um painel antigo que mostra zero divergências e não deixa visível o resultado da consulta mensal. Aumente o zoom do VS Code antes da nova gravação e mantenha a versão final entre 5 e 8 minutos. A reflexão e o texto “Como usei IA” foram aprovados pelo Fellow e confirmados com a coordenação. O Pull Request #1 já foi integrado; `ENTREGA.md` acompanha o que falta para concluir o envio.
