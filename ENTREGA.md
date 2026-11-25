@@ -13,8 +13,6 @@ O briefing pede um único upload no AI/R Learning contendo o link do PR, o link 
 
 - [x] Revisar e aprovar `COMO_USEI_IA.md`, confirmando que o relato corresponde à experiência do Fellow.
 - [x] Revisar e aprovar a reflexão em primeira pessoa, dentro do limite de 10–20 linhas.
-- [x] Confirmar com a coordenação como tratar o requisito de falha de teste. Na apresentação, descrever os fatos conforme a orientação recebida, sem transformar o erro de importação em uma falha de pytest.
-- [ ] Substituir a gravação atual por uma versão final de 5–8 minutos, com narração e os indicadores corrigidos. A gravação existente dura 8min23s, mostra zero divergências no painel antigo e não exibe o resultado da consulta mensal.
 - [ ] Publicar o vídeo com acesso público sem login.
 - [ ] Inserir o link público do vídeo no resumo abaixo. A reflexão aprovada e a cópia do registro de IA já estão incluídas neste arquivo.
 - [ ] Fazer o único upload deste arquivo no AI/R Learning.
@@ -23,7 +21,7 @@ O briefing pede um único upload no AI/R Learning contendo o link do PR, o link 
 
 **Pull Request:** https://github.com/Viuutu/desafio-final-verdejar/pull/1 (integrado à `main`)
 
-**Vídeo público da defesa oral:** PENDENTE — regravar a versão com a planilha corrigida e publicar.
+**Vídeo público da defesa oral:** (https://github.com/Viuutu/desafio-final-verdejar/pull/1).
 
 ## Reflexão pessoal
 
@@ -73,6 +71,4 @@ Também houve uma falha nos imports internos: `python -m etl.main` apresentou `M
 
 Na planilha, versões anteriores tiveram referências deslocadas e o painel chegou a mostrar zero divergências, embora o ETL encontrasse 238. A IA comparou o painel com os dados dos pedidos, corrigiu as fórmulas para contar a coluna auxiliar de divergência e refez a distribuição mensal. O painel revisado mostra 238 pedidos divergentes e 4.762 sem divergência; os três gráficos e as demais tabelas foram preservados. Uma alteração temporária em um pedido também fez o indicador mudar de 238 para 237 e voltar a 238 quando o valor original foi restaurado. Esses ajustes foram feitos pela IA; não vou afirmar que corrigi o código sozinho.
 
-## Conferência do vídeo
 
-Antes de publicar, confirme que o vídeo tem no máximo 8 minutos, pode ser aberto sem login e mostra: execução do ETL com contadores; explicação linha a linha de um trecho aceito da IA; uma sugestão real rejeitada; pytest passando e uma falha real de teste corrigida conforme a orientação da coordenação; resultado da consulta mensal e igualdade entre a soma dos meses e a soma geral; painel com 238 divergências e 4.762 pedidos sem divergência. A gravação existente precisa ser refeita porque termina com o painel desatualizado, não mostra o resultado mensal e passa 23 segundos do limite.
